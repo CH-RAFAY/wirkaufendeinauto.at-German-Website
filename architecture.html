@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architektur - Autoshop Project</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="architecture.html" class="nav-link active">Architecture</a>
+        <a href="integrated.html" class="nav-link">Integrated Site</a>
+        <a href="developers.html" class="nav-link">Developers</a>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>System Architecture & Workflow</h1>
+    
+    <div class="architecture-gallery">
+        <!-- Item 1: Dynamic Options -->
+        <div class="gallery-item">
+            <h2>Dynamic Options Handling</h2>
+            <img src="imgs/Other option.png" alt="Other Options Handling" onclick="openModal(this)">
+            <p>
+                To accommodate the vast variety of vehicle configurations, the form implements an intelligent "Other" option handler. 
+                While we provide comprehensive dropdown lists for standard makes, models, and features, users can always select "Other" to reveal a free-text input field. 
+                This hybrid approach combines the speed of structured data entry with the flexibility of custom input, ensuring that unique or rare vehicle specifications are accurately captured and never lost.
+            </p>
+        </div>
+
+        <!-- Item 2: Template -->
+        <div class="gallery-item">
+            <h2>Email Template</h2>
+            <img src="imgs/Template.pdf.jpg" alt="Email Template Structure" onclick="openModal(this)">
+            <p>
+                The email template is the core of our data presentation layer. It transforms raw JSON data from the form into a structured, professional HTML report. 
+                Designed for readability, it categorizes vehicle information into logical sections such as "Vehicle Details," "Condition Report," and "Owner History." 
+                This ensures that car dealers and evaluators can assess the vehicle's value at a glance, significantly speeding up the review process.
+            </p>
+            <a href="imgs/Template.html" class="blink-btn">View Live Template</a>
+        </div>
+
+        <!-- Item 3: API -->
+        <div class="gallery-item">
+            <h2>EmailJS API Integration</h2>
+            <img src="imgs/Emailjs API.png" alt="EmailJS API Configuration" onclick="openModal(this)">
+            <p>
+                This system leverages <strong>EmailJS</strong> to establish a direct, serverless communication channel between the client-side car review form and our email delivery infrastructure. 
+                By utilizing a secure Public Key and Service ID configuration, the application captures user input—including complex nested vehicle data—and transmits it instantly without requiring a traditional backend server. 
+                This architecture ensures high availability, reduces hosting complexity, and provides real-time feedback mechanisms for successful data transmission.
+            </p>
+        </div>
+
+        <!-- Item 4: Inbox -->
+        <div class="gallery-item">
+            <h2>Inbox Management</h2>
+            <img src="imgs/Inbox.png" alt="Email Inbox" onclick="openModal(this)">
+            <p>
+                Our centralized inbox management strategy ensures that every lead is captured and organized efficiently. 
+                Incoming vehicle reviews are automatically tagged and sorted based on dynamic subject lines generated from the car's make and model (e.g., "New Review: BMW X5 - 2020"). 
+                This allows the sales team to prioritize high-value vehicles and respond to potential sellers faster, improving conversion rates and customer satisfaction.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="img01">
+</div>
+
+<script>
+    // Modal Script
+    function openModal(element) {
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("img01");
+        modal.style.display = "block";
+        modalImg.src = element.src;
+    }
+
+    function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
+
+    // Close modal when clicking outside image
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhängiges Dropdown-Formular mit Fortschrittsbalken</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-links">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="architecture.html" class="nav-link">Architecture</a>
+        <a href="integrated.html" class="nav-link">Integrated Site</a>
+        <a href="developers.html" class="nav-link">Developers</a>
+    </div>
+</nav>
+<div class="form-container">
+    <form id="car-review-form">
+        <div class="form-group">
+            <label for="brand">Welche Marke hat Ihr Auto?</label>
+            <select id="brand">
+
+                <option value="">Marke auswählen</option>
+				<option value="Alfa Romeo">Alfa Romeo</option>
+				<option value="Audi">Audi</option>
+				<option value="Bentley">Bentley</option>
+				<option value="BMW">BMW</option>
+				<option value="BYD">BYD</option>
+				<option value="Cadillac">Cadillac</option>
+				<option value="Chrysler">Chrysler</option>
+				<option value="Chevrolet">Chevrolet</option>
+				<option value="Citroen">Citroen</option>
+				<option value="Dacia">Dacia</option>
+				<option value="Daewoo">Daewoo</option>
+				<option value="Daihatsu">Daihatsu</option>
+				<option value="Dodge">Dodge</option>
+				<option value="Fiat">Fiat</option>
+				<option value="Fisker">Fisker</option>
+				<option value="Ford">Ford</option>
+				<option value="GMC">GMC</option>
+				<option value="Great Wall">Great Wall</option>
+				<option value="Honda">Honda</option>
+				<option value="Hyundai">Hyundai</option>
+				<option value="Ineos">Ineos</option>
+				<option value="Infiniti">Infiniti</option>
+				<option value="Isuzu">Isuzu</option>
+				<option value="Jaguar">Jaguar</option>
+				<option value="Jeep">Jeep</option>
+				<option value="Kia">Kia</option>
+				<option value="Lada">Lada</option>
+				<option value="Lancia">Lancia</option>
+				<option value="Land Rover">Land Rover</option>
+				<option value="LEVC">LEVC</option>
+				<option value="Lexus">Lexus</option>
+				<option value="Lucid">Lucid</option>
+				<option value="Lynk">Lynk</option>
+				<option value="MAN">MAN</option>
+				<option value="Maserati">Maserati</option>
+				<option value="Maxus">Maxus</option>
+				<option value="Mazda">Mazda</option>
+				<option value="Smart">Smart</option>
+				<option value="Mercedes">Mercedes</option>
+				<option value="MG">MG</option>
+				<option value="Mini">Mini</option>
+				<option value="Mitsubishi">Mitsubishi</option>
+				<option value="Nio">Nio</option>
+				<option value="Nissan">Nissan</option>
+				<option value="Opel">Opel</option>
+				<option value="Peugeot">Peugeot</option>
+				<option value="Porsche">Porsche</option>
+				<option value="Proton">Proton</option>
+				<option value="Renault">Renault</option>
+				<option value="Rolls Royce">Rolls Royce</option>
+				<option value="Rover">Rover</option>
+				<option value="Saab">Saab</option>
+				<option value="Seat">Seat</option>
+				<option value="Skoda">Skoda</option>
+				<option value="Ssangyong">Ssangyong</option>
+				<option value="StreetScooter">StreetScooter</option>
+				<option value="Subaru">Subaru</option>
+				<option value="Suzuki">Suzuki</option>
+				<option value="Tesla">Tesla</option>
+				<option value="Toyota">Toyota</option>
+				<option value="Volvo">Volvo</option>
+				<option value="VW">VW</option>
+				<option value="Xpeng">Xpeng</option>
+
+				
+            </select>
+            <span class="guidance" id="brand-guidance">Bitte wählen Sie eine Marke aus.</span>
+        </div>
+        <div class="form-group">
+            <label for="model">Welches Modell?</label>
+            <select id="model" disabled required>
+                <option value="">Modell auswählen</option>
+            </select>
+            <span class="guidance" id="model-guidance">Bitte wählen Sie ein Modell aus.</span>
+            <input type="text" id="model-other" class="hidden other-input" placeholder="Modell eingeben">
+            <span class="guidance hidden" id="model-other-guidance">Bitte geben Sie ein gültiges Modell ein und drücken Sie Enter.</span>
+        </div>
+        <div class="form-group">
+            <label for="year">In welchem Jahr wurde es zugelassen?</label>
+            <select id="year" disabled required>
+                <option value="">Erstzulassung auswählen</option>
+            </select>
+            <span class="guidance" id="year-guidance">Bitte wählen Sie ein Jahr aus.</span>
+            <input type="text" id="year-other" class="hidden other-input" placeholder="Jahr eingeben">
+            <span class="guidance hidden" id="year-other-guidance">Bitte geben Sie ein gültiges Jahr ein und drücken Sie Enter.</span>
+        </div>
+        <div class="form-group hidden" id="shape-group">
+            <label for="shape">Welche Form hat es?</label>
+            <div class="option-box" data-value="Roadster">Roadster</div>
+            <div class="option-box" data-value="SUV">SUV</div>
+            <div class="option-box" data-value="Other">Andere</div>
+            <input type="text" id="shape-other" class="hidden other-input" placeholder="Form eingeben">
+            <span class="guidance" id="shape-guidance">Bitte wählen Sie eine Form aus oder geben Sie sie ein und drücken Sie Enter.</span>
+        </div>
+        <div class="form-group hidden" id="fuel-group">
+            <label for="fuel">Welchen Kraftstoff verwendet es?</label>
+            <div class="option-box" data-value="Petrol">Benzin</div>
+            <div class="option-box" data-value="Electric">Elektro</div>
+            <div class="option-box" data-value="Other">Andere</div>
+            <input type="text" id="fuel-other" class="hidden other-input" placeholder="Kraftstofftyp eingeben">
+            <span class="guidance" id="fuel-guidance">Bitte wählen Sie einen Kraftstofftyp aus oder geben Sie ihn ein und drücken Sie Enter.</span>
+        </div>
+        <div class="form-group hidden" id="variant-group">
+            <label for="variant">Modellvariante?</label>
+            <select id="variant" disabled required>
+                <option value="">Variante auswählen</option>
+            </select>
+            <span class="guidance" id="variant-guidance">Bitte wählen Sie eine Variante aus.</span>
+            <input type="text" id="variant-other" class="hidden other-input" placeholder="Modellvariante eingeben">
+            <span class="guidance hidden" id="variant-other-guidance">Bitte geben Sie eine gültige Variante ein und drücken Sie Enter.</span>
+        </div>
+        <div class="form-group hidden" id="horsepower-group">
+            <label for="horsepower">Wie viele PS hat es?</label>
+            <div class="option-box" data-value="147 kW">147 kW</div>
+            <div class="option-box" data-value="294 kW">294 kW</div>
+            <div class="option-box" data-value="Other">Andere</div>
+            <input type="text" id="horsepower-other" class="hidden other-input" placeholder="PS eingeben">
+            <span class="guidance" id="horsepower-guidance">Bitte wählen Sie die PS aus oder geben Sie sie ein und drücken Sie Enter.</span>
+        </div>
+        <div class="form-group hidden" id="transmission-group">
+            <label for="transmission">Welches Getriebe hat es?</label>
+            <div class="option-box" data-value="Automatic">Automatik</div>
+            <div class="option-box" data-value="Manual">Manuell</div>
+            <div class="option-box" data-value="Other">Andere</div>
+            <input type="text" id="transmission-other" class="hidden other-input" placeholder="Getriebetyp eingeben">
+            <span class="guidance" id="transmission-guidance">Bitte wählen Sie einen Getriebetyp aus oder geben Sie ihn ein und drücken Sie Enter.</span>
+        </div>
+        <div class="form-group hidden" id="doors-group">
+            <label for="doors">Wie viele Türen hat es?</label>
+            <div class="option-box" data-value="2 doors">2 Türen</div>
+            <div class="option-box" data-value="4 doors">4 Türen</div>
+            <div class="option-box" data-value="Other">Andere</div>
+            <input type="text" id="doors-other" class="hidden other-input" placeholder="Anzahl der Türen eingeben">
+            <span class="guidance" id="doors-guidance">Bitte wählen Sie die Anzahl der Türen aus oder geben Sie sie ein und drücken Sie Enter.</span>
+        </div>
+        <div class="form-group hidden" id="mileage-group">
+            <label for="mileage">Wie viele Kilometer hat es gefahren?</label>
+            <input type="text" id="mileage" placeholder="Kilometerstand eingeben" required>
+            <span class="guidance" id="mileage-guidance">Bitte geben Sie einen gültigen Kilometerstand ein.</span>
+        </div>
+        <div class="form-group hidden" id="keys-group">
+            <label for="keys">Wie viele Fahrzeugschlüssel haben Sie?</label>
+            <select id="keys" required>
+                <option value="">Anzahl der Schlüssel auswählen</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <span class="guidance" id="keys-guidance">Bitte wählen Sie die Anzahl der Schlüssel aus.</span>
+        </div>
+        <div class="form-group hidden" id="second-set-tires-group">
+            <label for="second-set-tires">Besitzen Sie einen zweiten Reifensatz?</label>
+            <select id="second-set-tires" required>
+                <option value="">Option auswählen</option>
+                <option value="Yes">Ja</option>
+                <option value="No">Nein</option>
+            </select>
+            <span class="guidance" id="second-set-tires-guidance">Bitte wählen Sie eine Option aus.</span>
+        </div>
+        <div class="form-group hidden" id="service-booklet-group">
+            <label for="service-booklet">Ist das Serviceheft vorhanden?</label>
+            <select id="service-booklet" required>
+                <option value="">Option auswählen</option>
+                <option value="Yes">Ja</option>
+                <option value="No">Nein</option>
+            </select>
+            <span class="guidance" id="service-booklet-guidance">Bitte wählen Sie eine Option aus.</span>
+        </div>
+        <div class="form-group hidden" id="mot-renewal-group">
+            <label for="mot-renewal">Haben Sie die HU in den letzten 6 Monaten erneuert?</label>
+            <select id="mot-renewal" required>
+                <option value="">Option auswählen</option>
+                <option value="Yes">Ja</option>
+                <option value="No">Nein</option>
+            </select>
+            <span class="guidance" id="mot-renewal-guidance">Bitte wählen Sie eine Option aus.</span>
+        </div>
+        <div class="form-group hidden" id="financing-group">
+            <label for="financing">Gibt es derzeit eine Finanzierung/Leasing für das Fahrzeug?</label>
+            <select id="financing" required>
+                <option value="">Option auswählen</option>
+                <option value="Yes">Ja</option>
+                <option value="No">Nein</option>
+            </select>
+            <span class="guidance" id="financing-guidance">Bitte wählen Sie eine Option aus.</span>
+        </div>
+        <div class="form-group hidden" id="owners-group">
+            <label for="owners">Wie viele Fahrzeugbesitzer hatte Ihr Fahrzeug bisher?</label>
+            <select id="owners" required>
+                <option value="">Anzahl der Besitzer auswählen</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <span class="guidance" id="owners-guidance">Bitte wählen Sie die Anzahl der Besitzer aus.</span>
+        </div>
+        <div class="form-group hidden" id="exterior-color-group">
+            <label for="exterior-color">Welche Außenfarbe hat Ihr Fahrzeug?</label>
+            <div class="option-box color-box" data-value="Black"><span class="color-circle" style="background-color: black;"></span>Schwarz</div>
+            <div class="option-box color-box" data-value="White"><span class="color-circle" style="background-color: white; border: 1px solid #ccc;"></span>Weiß</div>
+            <div class="option-box color-box" data-value="Grey"><span class="color-circle" style="background-color: grey;"></span>Grau</div>
+            <div class="option-box color-box" data-value="Silver"><span class="color-circle" style="background-color: silver;"></span>Silber</div>
+            <div class="option-box color-box" data-value="Blue"><span class="color-circle" style="background-color: blue;"></span>Blau</div>
+            <div class="option-box color-box" data-value="Other"><span class="color-circle" style="background-color: transparent;"></span>Andere</div>
+            <input type="text" id="exterior-color-other" class="hidden other-input" placeholder="Farbe eingeben">
+            <span class="guidance" id="exterior-color-guidance">Bitte wählen Sie eine Farbe aus oder geben Sie sie ein und drücken Sie Enter.</span>
+        </div>
+        <div class="form-group hidden" id="seats-material-group">
+            <label for="seats-material">Aus welchem Material sind Ihre Autositze?</label>
+            <div class="option-box" data-value="Fabric">Stoff</div>
+            <div class="option-box" data-value="Leather">Leder</div>
+            <div class="option-box" data-value="Plastic">Kunststoff</div>
+            <div class="option-box" data-value="Partial Leather">Teilleder</div>
+            <div class="option-box" data-value="Alcantara">Alcantara</div>
+            <div class="option-box" data-value="Other">Andere</div>
+            <input type="text" id="seats-material-other" class="hidden other-input" placeholder="Material eingeben">
+            <span class="guidance" id="seats-material-guidance">Bitte wählen Sie ein Material aus oder geben Sie es ein und drücken Sie Enter.</span>
+        </div>
+        <div class="form-group hidden" id="ready-to-drive-group">
+            <label for="ready-to-drive">Ist das Fahrzeug fahrbereit?</label>
+            <select id="ready-to-drive" required>
+                <option value="">Option auswählen</option>
+                <option value="Yes">Ja</option>
+                <option value="No">Nein</option>
+            </select>
+            <span class="guidance" id="ready-to-drive-guidance">Bitte wählen Sie eine Option aus.</span>
+        </div>
+        <div class="form-group hidden" id="accident-damage-group">
+            <label for="accident-damage">Hat das Fahrzeug bereits Unfallschäden?</label>
+            <select id="accident-damage" required>
+                <option value="">Option auswählen</option>
+                <option value="Yes">Ja</option>
+                <option value="No">Nein</option>
+            </select>
+            <span class="guidance" id="accident-damage-guidance">Bitte wählen Sie eine Option aus.</span>
+        </div>
+        <div class="form-group hidden" id="interior-condition-group">
+            <label for="interior-condition">Wie gut gepflegt ist das Fahrzeug von innen?</label>
+            <select id="interior-condition" required>
+                <option value="">Zustand auswählen</option>
+                <option value="Very good">Sehr gut</option>
+                <option value="Good">Gut</option>
+                <option value="Fair">Mäßig</option>
+                <option value="Poor">Schlecht</option>
+            </select>
+            <span class="guidance" id="interior-condition-guidance">Bitte wählen Sie einen Zustand aus.</span>
+        </div>
+        <div class="form-group hidden" id="exterior-condition-group">
+            <label for="exterior-condition">Wie gut gepflegt ist das Fahrzeug von außen?</label>
+            <select id="exterior-condition" required>
+                <option value="">Zustand auswählen</option>
+                <option value="Very good">Sehr gut</option>
+                <option value="Good">Gut</option>
+                <option value="Fair">Mäßig</option>
+                <option value="Poor">Schlecht</option>
+            </select>
+            <span class="guidance" id="exterior-condition-guidance">Bitte wählen Sie einen Zustand aus.</span>
+        </div>
+        <div class="form-group hidden" id="gearbox-working-group">
+            <label for="gearbox-working">Funktioniert das Getriebe Ihres Fahrzeugs einwandfrei?</label>
+            <select id="gearbox-working" required>
+                <option value="">Option auswählen</option>
+                <option value="Yes">Ja</option>
+                <option value="No">Nein</option>
+            </select>
+            <span class="guidance" id="gearbox-working-guidance">Bitte wählen Sie eine Option aus.</span>
+        </div>
+        <div class="form-group hidden" id="steering-working-group">
+            <label for="steering-working">Funktioniert die Lenkung Ihres Fahrzeugs einwandfrei?</label>
+            <select id="steering-working" required>
+                <option value="">Option auswählen</option>
+                <option value="Yes">Ja</option>
+                <option value="No">Nein</option>
+            </select>
+            <span class="guidance" id="steering-working-guidance">Bitte wählen Sie eine Option aus.</span>
+        </div>
+        <div class="form-group hidden" id="brakes-working-group">
+            <label for="brakes-working">Funktionieren die Bremsen Ihres Fahrzeugs einwandfrei?</label>
+            <select id="brakes-working" required>
+                <option value="">Option auswählen</option>
+                <option value="Yes">Ja</option>
+                <option value="No">Nein</option>
+            </select>
+            <span class="guidance" id="brakes-working-guidance">Bitte wählen Sie eine Option aus.</span>
+        </div>
+        <div class="form-group hidden" id="ac-working-group">
+            <label for="ac-working">Funktioniert die Klimaanlage Ihres Fahrzeugs einwandfrei?</label>
+            <select id="ac-working" required>
+                <option value="">Option auswählen</option>
+                <option value="Yes">Ja</option>
+                <option value="No">Nein</option>
+            </select>
+            <span class="guidance" id="ac-working-guidance">Bitte wählen Sie eine Option aus.</span>
+        </div>
+        <div class="form-group hidden" id="vin-group">
+            <label for="vin">Wie lautet die FIN Ihres Fahrzeugs?</label>
+            <input type="text" id="vin" placeholder="FIN eingeben (z.B. 1HGCM82633A004352)" pattern="[A-HJ-NPR-Z0-9]{17}" maxlength="17" required>
+            <span class="guidance" id="vin-guidance">Bitte geben Sie eine gültige 17-stellige FIN ein.</span>
+        </div>
+        <div class="form-group hidden" id="location-group">
+            <label for="location">Wo befindet sich Ihr Fahrzeug?</label>
+            <input type="text" id="location" placeholder="Standort eingeben" required>
+            <span class="guidance" id="location-guidance">Bitte geben Sie einen gültigen Standort ein.</span>
+        </div>
+        <div class="form-group hidden" id="additional-options-group">
+            <div class="form-group">
+                <label for="sell-plan">Wann planen Sie zu verkaufen?</label>
+                <select id="sell-plan" required>
+                    <option value="">Zeitraum auswählen</option>
+                    <option value="next-4-weeks">Innerhalb der nächsten 4 Wochen</option>
+                    <option value="next-3-months">Innerhalb der nächsten 3 Monate</option>
+                    <option value="next-6-months">Innerhalb der nächsten 6 Monate</option>
+                </select>
+                <span class="guidance" id="sell-plan-guidance">Bitte wählen Sie einen Zeitraum aus.</span>
+            </div>
+            <div class="form-group hidden" id="prefer-to-sell-group">
+                <label for="prefer-to-sell">Sind Sie ein gewerblicher oder privater Verkäufer?</label>
+                <select id="prefer-to-sell" required>
+                    <option value="">Option auswählen</option>
+                    <option value="private">Privater Verkäufer</option>
+                    <option value="commercial">Gewerblicher Verkäufer</option>
+                </select>
+                <span class="guidance" id="prefer-to-sell-guidance">Bitte wählen Sie eine Option aus.</span>
+            </div>
+            <div class="form-group hidden" id="email-group">
+                <label for="email">Wohin sollen wir das Verkaufsangebot senden?</label>
+                <input type="email" id="email" placeholder="Bitte geben Sie Ihre E-Mail-Adresse ein" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                <span class="guidance" id="email-guidance">Bitte geben Sie eine gültige E-Mail-Adresse ein.</span>
+            </div>
+        </div>
+        <button type="submit" class="submit-btn" disabled>Bewertung absenden!</button>
+        <div class="progress-wrapper">
+            <div class="progress-container">
+                <svg class="progress-semicircle" viewBox="0 0 220 220">
+                    <path 
+                        d="M 40 110 A 70 70 0 0 1 180 110" 
+                        class="progress-background"
+                    />
+                    <path 
+                        d="M 40 110 A 70 70 0 0 1 180 110" 
+                        class="progress-value"
+                        id="progress-arc"
+                    />
+                </svg>
+                <div class="progress-text">
+                    <div class="progress-percentage" id="progress-percentage">0%</div>
+                    <div class="progress-label">abgeschlossen</div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
